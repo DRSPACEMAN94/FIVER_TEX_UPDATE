@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'customfont';
+    src: url(d7d061cb374c43ae5fd3.ttf) format('truetype');
+  }
+  .customfont{
+    font-family: 'customfont';
+  }
+  
+  
+  body{
+      font-family: '28 Days Later';
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+/* FOR FULL SCREEN*/
+html, body{
+    overflow:hidden;
+}
+.webgl{
+    outline: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+
+/*FOR PART OF PAGE CANVAS .canvasparent size should be set inline.
+.canvasparent{
+    width: 100vw;
+    height: 100vh;
+}
+.webgl{
+    outline: none;
+}
+*/
