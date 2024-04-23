@@ -117,29 +117,43 @@
 
         renderer.toneMapping = THREE.ACESFilmicToneMapping; // Set the tone mapping
 
-        function animate() { // Animation function
-            controls.update(); // Update the controls
-            renderer.render(scene, camera); // Render the scene
-            window.requestAnimationFrame(animate); // Request next animation frame
-
-        }
-        animate(); // Start the animation loop
-
         // Setup WebSocket connection
-    const ws = new WebSocket('wss://6cf2-67-201-33-40.ngrok-free.app/');
-    ws.onmessage = function(event) {
+const ws = new WebSocket('wss://6cf2-67-201-33-40.ngrok-free.app/');
+
+ws.onerror = function(event) {
+    console.error("WebSocket error observed:", event);
+};
+
+ws.onopen = function(event) {
+    console.log("WebSocket connection successfully opened");
+};
+
+ws.onclose = function(event) {
+    console.log("WebSocket connection closed", event.reason);
+};
+
+ws.onmessage = function(event) {
+    console.log("Received data:", event.data);
     const data = JSON.parse(event.data);
     if (data.textureUrl && window.shirtobj) {
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load(data.textureUrl, function(texture) {
             window.shirtobj.traverse((child) => {
                 if (child.isMesh) {
-                    child.material.map = texture; // Ensuring all statements are properly closed
+                    child.material.map = texture; // Apply texture to mesh
                 }
-            }); // Close the traverse function call
-        }); // Close the load function call
-    } // Close the if condition
-}; // Close the onmessage event handler
+            });
+        });
+    }
+};
+
+function animate() { // Animation function
+    controls.update(); // Update the controls
+    renderer.render(scene, camera); // Render the scene
+    window.requestAnimationFrame(animate); // Request next animation frame
+}
+animate(); // Start the animation loop
+
 
 
     </script>
