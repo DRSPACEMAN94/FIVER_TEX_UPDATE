@@ -123,20 +123,19 @@
         // Setup WebSocket connection
     const ws = new WebSocket('ws://6cf2-67-201-33-40.ngrok-free.app/');
     ws.onmessage = function(event) {
-        const data = JSON.parse(event.data);
-        if (data.textureUrl && window.shirtobj) {
-            const textureLoader = new THREE.TextureLoader();
-            textureLoader.load(data.textureUrl, function(texture) {
-                window.shirtobj.traverse((child) => {
-                    if (child.isMesh) child.material.map = texture;
-
-     
-                        }
-                    }
+    const data = JSON.parse(event.data);
+    if (data.textureUrl && window.shirtobj) {
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load(data.textureUrl, function(texture) {
+            window.shirtobj.traverse((child) => {
+                if (child.isMesh) {
+                    child.material.map = texture; // Ensuring all statements are properly closed
                 }
-            });
+            }); // Close the traverse function call
+        }); // Close the load function call
+    } // Close the if condition
+}; // Close the onmessage event handler
 
-        }
 
     </script>
 </head>
