@@ -84,12 +84,17 @@
         }
 
         const aspectRatio = sizes.width / sizes.height; // Calculate the aspect ratio
-
+       
         const camera = new THREE.PerspectiveCamera(70, aspectRatio, 1, 1000); // Setup the camera
         camera.position.z = 13; // Set initial Z position
         camera.position.y = 0; // Set initial Y position
         scene.add(camera); // Add camera to the scene
-
+       
+        function refreshload() {
+    // Define what refreshload should do, e.g., refresh textures or data
+        console.log("Refresh or update resources as necessary");
+        }
+        
         const cursor = { x: 0, y: 0 } // Object to track cursor position
 
         canvas.addEventListener('mousemove', movecallback, false); // Setup mouse move listener
