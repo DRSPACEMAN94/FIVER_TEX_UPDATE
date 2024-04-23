@@ -121,7 +121,7 @@
         animate(); // Start the animation loop
 
         // Setup WebSocket connection
-    const ws = new WebSocket('ws://6cf2-67-201-33-40.ngrok-free.app/');
+    const ws = new WebSocket('wss://6cf2-67-201-33-40.ngrok-free.app/');
     ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
     if (data.textureUrl && window.shirtobj) {
